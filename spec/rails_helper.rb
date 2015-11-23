@@ -55,3 +55,18 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+def sign_up_user
+  user = FactoryGirl.build(:user)
+  visit new_users_url
+  fill_in("Username", with: user.username)
+  fill_in("Password", with: user.password)
+  click_button "Sign Up"
+end
+
+def sign_in_as_user
+  visit new_session_url
+  fill_in("Username", with: "MyString")
+  fill_in("Password", with: "password")
+  click_button "Sign In"
+end
