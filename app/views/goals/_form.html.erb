@@ -1,0 +1,30 @@
+<% action = goal.persisted? ? goal_url(goal) : goals_url %>
+<% method = goal.persisted? ? "PATCH" : "POST" %>
+<% message = goal.persisted? ? "Update Goal" : "Add Goal" %>
+
+<%= flash[:errors] %>
+<form class="" action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= auth_token %>
+
+  <label>Description
+    <input type="text" name="goal[description]" value="<%= goal.description %>">
+  </label>
+  <br>
+  <label>Public
+    <input
+    type="radio"
+    name="goal[goal_type]"
+    value="public"
+    <%= "checked" if goal.goal_type == "public" %>>
+  </label>
+  <label>Private
+    <input
+    type="radio"
+    name="goal[goal_type]"
+    value="private"
+    <%#= "checked" if goal.goal_type == "private" %>>
+  </label>
+  <br>
+  <input type="submit" value="<%= message %>">
+</form>

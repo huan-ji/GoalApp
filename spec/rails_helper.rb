@@ -56,17 +56,38 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-def sign_up_user
-  user = FactoryGirl.build(:user)
+
+
+def create_goal(goal)
+  click_button "New Goal"
+  fill_in("Description", with: goal)
+  choose('Public')
+  click_button "Add Goal"
+end
+
+def delete_goal
+  click_button "Delete Goal"
+end
+
+def sign_up_user(user)
   visit new_users_url
   fill_in("Username", with: user.username)
   fill_in("Password", with: user.password)
   click_button "Sign Up"
 end
 
-def sign_in_as_user
+def sign_in_as_user(user)
+  sign_up_user(user)
   visit new_session_url
-  fill_in("Username", with: "MyString")
-  fill_in("Password", with: "password")
+  fill_in("Username", with: user.username)
+  fill_in("Password", with: user.password)
   click_button "Sign In"
+end
+
+def create_private_goal(user)
+  sign_in_as_user(user)
+  click_button "New Goal"
+  fill_in("Description", with: "This is a private goal")
+  choose('Private')
+  click_button "Add Goal"
 end

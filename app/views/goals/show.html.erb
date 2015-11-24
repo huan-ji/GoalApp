@@ -1,0 +1,22 @@
+<h1><%= @goal.description %></h1>
+<h2>
+<% if @goal.completed == "0" %>
+  Goal Incompleted
+<% elsif @goal.completed == "1" %>
+  Goal Completed
+<% end %>
+</h2>
+<%= button_to "Edit Goal", edit_goal_url(@goal), method: :get %>
+<%= button_to "Delete Goal", goal_url(@goal), method: :delete %>
+<%= link_to "Goals", goals_url %>
+
+
+<% if @goal.completed == "0" %>
+  <%= flash[:errors] %>
+  <form class="" action="<%= goal_url(@goal) %>" method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <%= auth_token %>
+    <input type="hidden" name="goal[completed]" value="1">
+    <input type="submit" value="Completed">
+  </form>
+<% end %>

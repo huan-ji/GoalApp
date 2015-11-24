@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by_credentials(params[:user][:username], params[:user][:password])
     if user
       login!(user)
-      redirect_to users_url
+      redirect_to goals_url
     else
       flash.now[:errors] = user.errors.full_messages
       render :new
