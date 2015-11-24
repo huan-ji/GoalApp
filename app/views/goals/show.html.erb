@@ -30,7 +30,7 @@
 <%= flash[:errors] %>
 <form class="" action="/goal_comments" method="post">
   <%= auth_token %>
-  <input type="hiddent" name="goal_comment[goal_id]" value="<%= @goal.id %>">
+  <input type="hidden" name="goal_comment[goal_id]" value="<%= @goal.id %>">
   <input type="text" name="goal_comment[body]">
   <input type="submit" value="Add Comment">
 </form>
