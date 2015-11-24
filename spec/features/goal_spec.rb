@@ -75,7 +75,6 @@ feature "complete/incomplete goals" do
 
   scenario "Show page has completed button when goal is incomplete" do
     sign_in_as_user(user)
-    save_and_open_page
     click_on("goal 1")
     expect(page).to have_button("Completed")
   end

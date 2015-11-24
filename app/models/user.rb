@@ -7,6 +7,18 @@ class User < ActiveRecord::Base
 
   has_many :goals, dependent: :destroy
 
+  has_many :goal_comments
+
+  has_many :user_comments,
+    class_name: "UserComment",
+    foreign_key: :user_id,
+    primary_key: :id
+
+  has_many :authored_comments,
+    class_name: "UserComment",
+    foreign_key: :author_id,
+    primary_key: :id
+
   attr_reader :password
 
   def self.find_by_credentials(username, password)
